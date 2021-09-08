@@ -1,6 +1,6 @@
 import {Login} from "../pages/Login";
 import {Registration} from "../pages/Registration";
-import {Map} from "../pages/Map";
+import {Order} from "../pages/Order";
 import {Profile} from "../pages/Profile";
 
 export const ROUTES_PATH = {
@@ -27,7 +27,7 @@ export const privateRoutes = [
     {
         path: ROUTES_PATH.order,
         exact: true,
-        component: Map,
+        component: Order,
     },
     {
         path: ROUTES_PATH.profile,

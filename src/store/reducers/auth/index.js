@@ -1,7 +1,7 @@
 import {AuthActionType} from "../../actions/auth";
 
 const initialState = {
-    isAuth: false,
+    isAuth: true,
 }
 
 export const auth = (state = initialState, action) => {

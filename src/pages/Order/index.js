@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const Map = () => {
+export const Order = () => {
     return (
         <div>
             Main

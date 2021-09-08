@@ -1,0 +1,40 @@
+.header {
+  padding: 20px 50px 20px 27px;
+  background-color: #1C1A19;
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+
+  &__brand {
+    img {
+      width: 269px;
+    }
+  }
+
+  &__list {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    list-style: none;
+  }
+
+  &__item {
+    &:not(:last-child) {
+      margin-right: 24px;
+    }
+  }
+
+  &__link {
+    display: block;
+    padding: 6px 8px;
+    font-size: 21px;
+    line-height: 25px;
+    color: #fff;
+
+    &--active {
+      color: #FDBF5A;
+    }
+  }
+}

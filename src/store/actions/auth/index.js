@@ -3,7 +3,7 @@ export const AuthActionType = {
 }
 
 export const AuthActionCreators = {
-    login: (auth) => ({
+    login: auth => ({
         type: AuthActionType.SET_AUTH,
         payload: auth
     })
