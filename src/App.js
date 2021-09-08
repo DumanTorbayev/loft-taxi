@@ -1,25 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import {Switch, Route, Redirect} from "react-router-dom";
+import {privateRoutes, publicRoutes, ROUTES_PATH} from "./routes";
+import {AuthLayout} from "./layout/Auth";
+import {Header} from "./components/Header";
+import {useSelector} from "react-redux";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+export const App = () => {
+    const {isAuth} = useSelector(state => state.auth)
 
-export default App;
+    return (
+        <>
+            {
+                isAuth ?
+                    <>
+                        <Header/>
+                        <Switch>
+                            {privateRoutes.map(({path, exact, component}) => (
+                                <Route key={path} path={path} exact={exact} component={component}/>
+                            ))}
+                            <Redirect to={ROUTES_PATH.order}/>
+                        </Switch>
+                    </>
+                    :
+                    <AuthLayout>
+                        <Switch>
+                            {publicRoutes.map(({path, exact, component}) => (
+                                <Route key={path} path={path} exact={exact} component={component}/>
+                            ))}
+                            <Redirect to={ROUTES_PATH.login}/>
+                        </Switch>
+                    </AuthLayout>
+            }
+        </>
+    );
+};
