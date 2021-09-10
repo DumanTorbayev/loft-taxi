@@ -1,0 +1,52 @@
+.profile__form {
+  display: flex;
+  align-items: flex-start;
+
+  form {
+    width: 100%;
+    max-width: 355px;
+    margin-right: 99px;
+
+    .error-message {
+      position: absolute;
+      bottom: -15px;
+    }
+  }
+
+  .primary-btn {
+    position: absolute;
+    left: 50%;
+    bottom: -120px;
+    transform: translateX(-50%);
+    max-width: 353px;
+  }
+
+  .profile__card {
+    display: flex;
+    flex-direction: column;
+    width: 347px;
+    height: 182px;
+    padding: 18px 16px 18px 28px;
+    background: #FFFFFF;
+    box-shadow: 0 5px 20px 2px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+
+    &-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    &-number {
+      margin: auto 0;
+      font-size: 21px;
+      line-height: 25px;
+    }
+
+    &-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+  }
+}

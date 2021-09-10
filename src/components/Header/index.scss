@@ -8,8 +8,11 @@
   align-items: center;
 
   &__brand {
+    display: flex;
+
     img {
       width: 269px;
+      font-size: 0;
     }
   }
 

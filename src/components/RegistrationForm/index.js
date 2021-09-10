@@ -11,8 +11,7 @@ export const RegistrationForm = () => {
     const {login} = useActions()
 
     const onSubmit = data => {
-        console.log(data)
-        login(true)
+        login()
     }
 
     return (
@@ -39,10 +38,10 @@ export const RegistrationForm = () => {
             </div>
             <div className="form__field">
                 <label
-                    className={`form__label ${errors.email ? 'form__label--error' : ''}`}
+                    className={`form__label ${errors.name ? 'form__label--error' : ''}`}
                     htmlFor="name"
                 >
-                    Как вас зовут?*
+                    Имя*
                 </label>
                 <input
                     className="form__input"
@@ -51,6 +50,21 @@ export const RegistrationForm = () => {
                     {...register("name", {required: true})}
                 />
                 {errors.name && errors.name.type === "required" && <ErrorMessage>Это поле обязательное</ErrorMessage>}
+            </div>
+            <div className="form__field">
+                <label
+                    className={`form__label ${errors.surname ? 'form__label--error' : ''}`}
+                    htmlFor="surname"
+                >
+                    Фамилия*
+                </label>
+                <input
+                    className="form__input"
+                    id="surname"
+                    type="text"
+                    {...register("surname", {required: true})}
+                />
+                {errors.surname && errors.surname.type === "required" && <ErrorMessage>Это поле обязательное</ErrorMessage>}
             </div>
             <div className="form__field form__field--last">
                 <label

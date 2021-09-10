@@ -20,6 +20,18 @@
     color: #000000;
   }
 
+  &__group {
+    flex-wrap: nowrap !important;
+    gap: 0 35px;
+  }
+
+  &__control {
+    &:first-child,
+    &:nth-child(2) {
+      margin-bottom: 26px;
+    }
+  }
+
   &__field {
     display: flex;
     flex-direction: column;

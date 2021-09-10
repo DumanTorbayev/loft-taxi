@@ -8,11 +8,10 @@ import {useActions} from "../../hooks/useActions";
 
 export const LoginForm = () => {
     const {register, handleSubmit, formState: {errors}} = useForm()
-    const {login} = useActions()
+    const {setAuth} = useActions()
 
     const onSubmit = data => {
-        console.log(data)
-        login(true)
+        setAuth(data)
     }
 
     return (

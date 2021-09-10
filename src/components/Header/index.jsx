@@ -4,11 +4,12 @@ import {NavLink} from "react-router-dom";
 import {useActions} from "../../hooks/useActions";
 
 export const Header = () => {
-    const {login} = useActions()
+    const {logout} = useActions()
 
     const handleLogout = e => {
         e.preventDefault()
-        login(false)
+        logout()
+        localStorage.removeItem('auth')
     }
 
     return (
