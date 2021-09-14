@@ -5,89 +5,81 @@ import {Link} from "react-router-dom";
 import {ROUTES_PATH} from "../../routes";
 import {ErrorMessage} from "../UI/ErrorMessage";
 import {useActions} from "../../hooks/useActions";
+import {FormControl, FormGroup, Input, InputLabel} from "@material-ui/core";
+import {useStyles} from "../../hooks/useStyles";
+import {useSelector} from "react-redux";
+import {Alert} from "@material-ui/lab";
+import usePortal from "react-useportal";
 
 export const RegistrationForm = () => {
     const {register, handleSubmit, formState: {errors}} = useForm()
-    const {login} = useActions()
+    const {setRegistration} = useActions()
+    const classes = useStyles()
+    const {isLoading, error, isRegisterIn} = useSelector(state => state.registration)
+    const { Portal } = usePortal({
+        bindTo: document && document.getElementById('alert-portal')
+    })
 
     const onSubmit = data => {
-        login()
+        setRegistration(data)
     }
 
     return (
-        <form className="form form--registration" onSubmit={handleSubmit(onSubmit)}>
-            <div className="form__title">Регистрация</div>
-            <div className="form__field">
-                <label
-                    className={`form__label ${errors.email ? 'form__label--error' : ''}`}
-                    htmlFor="email"
-                >
-                    Email*
-                </label>
-                <input
-                    className="form__input"
-                    id="email"
-                    type="text"
-                    {...register("email", {
-                        required: true,
-                        pattern: /^\S+@\S+$/i,
-                    })}
-                />
-                {errors.email && errors.email.type === "required" && <ErrorMessage>Это поле обязательное</ErrorMessage>}
-                {errors.email && errors.email.type === "pattern" && <ErrorMessage>Некорректный email</ErrorMessage>}
-            </div>
-            <div className="form__field">
-                <label
-                    className={`form__label ${errors.name ? 'form__label--error' : ''}`}
-                    htmlFor="name"
-                >
-                    Имя*
-                </label>
-                <input
-                    className="form__input"
-                    id="name"
-                    type="text"
-                    {...register("name", {required: true})}
-                />
-                {errors.name && errors.name.type === "required" && <ErrorMessage>Это поле обязательное</ErrorMessage>}
-            </div>
-            <div className="form__field">
-                <label
-                    className={`form__label ${errors.surname ? 'form__label--error' : ''}`}
-                    htmlFor="surname"
-                >
-                    Фамилия*
-                </label>
-                <input
-                    className="form__input"
-                    id="surname"
-                    type="text"
-                    {...register("surname", {required: true})}
-                />
-                {errors.surname && errors.surname.type === "required" && <ErrorMessage>Это поле обязательное</ErrorMessage>}
-            </div>
-            <div className="form__field form__field--last">
-                <label
-                    className={`form__label ${errors.password ? 'form__label--error' : ''}`}
-                    htmlFor="password"
-                >
-                    Придумайте пароль*
-                </label>
-                <input
-                    className="form__input"
-                    id="password"
-                    type="password"
-                    {...register("password", {required: true,})}
-                />
-                {errors.password && <ErrorMessage>Это поле обязательное</ErrorMessage>}
-            </div>
+        <>
+            <form className="form form--registration" onSubmit={handleSubmit(onSubmit)}>
+                <div className="form__title">Регистрация</div>
+                <FormControl fullWidth={true} margin="normal">
+                    <InputLabel htmlFor="email">Email*</InputLabel>
+                    <Input
+                        id="email"
+                        {...register("email", {
+                            required: true,
+                            pattern: /^\S+@\S+$/i,
+                        })}
+                    />
+                    {errors.email && errors.email.type === "required" && <ErrorMessage>Это поле обязательное</ErrorMessage>}
+                    {errors.email && errors.email.type === "pattern" && <ErrorMessage>Некорректный email</ErrorMessage>}
+                </FormControl>
+                <FormGroup row={true} className={classes.gap}>
+                    <FormControl margin="normal" className={classes.formControl}>
+                        <InputLabel htmlFor="name">Имя*</InputLabel>
+                        <Input
+                            id="name"
+                            {...register("name", {required: true,})}
+                        />
+                        {errors.name && errors.name.type === "required" &&
+                        <ErrorMessage>Это поле обязательное</ErrorMessage>}
+                    </FormControl>
+                    <FormControl margin="normal" className={classes.formControl}>
+                        <InputLabel htmlFor="surname">Фамилия*</InputLabel>
+                        <Input
+                            id="surname"
+                            {...register("surname", {required: true,})}
+                        />
+                        {errors.surname && errors.surname.type === "required" &&
+                        <ErrorMessage>Это поле обязательное</ErrorMessage>}
+                    </FormControl>
+                </FormGroup>
+                <FormControl fullWidth={true} margin="normal">
+                    <InputLabel htmlFor="password">Придумайте пароль*</InputLabel>
+                    <Input
+                        id="password"
+                        type="password"
+                        {...register("password", {required: true,})}
+                    />
+                    {errors.password && errors.password.type === "required" &&
+                    <ErrorMessage>Это поле обязательное</ErrorMessage>}
+                </FormControl>
 
-            <Button>Зарегистрироваться</Button>
+                <Button preloader={isLoading} disabled={isLoading}>Зарегистрироваться</Button>
 
-            <div className="form__redirect-btn">
-                Новый пользователь?
-                <Link to={ROUTES_PATH.login}>Войти</Link>
-            </div>
-        </form>
+                <div className="form__redirect-btn">
+                    Новый пользователь?
+                    <Link to={ROUTES_PATH.login}>Войти</Link>
+                </div>
+            </form>
+            {error && <Portal><Alert severity="error">{error}</Alert></Portal>}
+            {isRegisterIn && <Portal><Alert severity="success">Регистрация прошла успешно</Alert></Portal>}
+        </>
     );
 };

@@ -6,84 +6,45 @@
   min-width: 355px;
   margin: 56px 112.5px;
 
+  .error-message {
+    position: absolute;
+    bottom: -14px;
+    left: 0;
+  }
+
+  .primary-btn {
+    margin-bottom: 33px;
+  }
+
   &--registration {
     .primary-btn {
       margin-top: 50px;
     }
   }
 
+  &--order {
+    width: 100%;
+    min-width: auto;
+    margin: 0;
+
+    .primary-btn {
+      margin-bottom: 0;
+      margin-top: 30px;
+    }
+  }
+
   &__title {
-    margin-bottom: 57px;
+    margin: 0 0 57px;
     font-weight: bold;
     font-size: 30px;
     line-height: 35px;
     color: #000000;
   }
 
-  &__group {
-    flex-wrap: nowrap !important;
-    gap: 0 35px;
-  }
-
-  &__control {
-    &:first-child,
-    &:nth-child(2) {
-      margin-bottom: 26px;
-    }
-  }
-
-  &__field {
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    width: 100%;
-    margin-bottom: 25px;
-
-    &--last {
-      margin-bottom: 0;
-    }
-
-    .error-message {
-      position: absolute;
-      bottom: -14px;
-      left: 0;
-    }
-  }
-
-  &__label {
-    font-weight: bold;
-    font-size: 16px;
-    line-height: 19px;
-    color: #000;
-
-    &--error {
-      color: #FF0000;
-    }
-  }
-
-  &__input {
-    padding: 11px 0;
-    border: none;
-    border-bottom: 2px solid #E4E4E4;
-    font-size: 18px;
-    line-height: 21px;
-    color: #828282;
-
-    &:focus {
-      border: 0;
-      outline: none;
-      border-bottom: 2px solid #FDBF5A;
-    }
-  }
-
   &__restore-password {
     align-self: flex-end;
     margin: 13px 0 46px;
     color: #828282;
-  }
-
-  .primary-btn {
-    margin-bottom: 33px;
   }
 
   &__redirect-btn {

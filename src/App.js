@@ -6,13 +6,15 @@ import {Header} from "./components/Header";
 import {useSelector} from "react-redux";
 import {MapLayout} from "./components/MapLayout";
 import {useActions} from "./hooks/useActions";
+import CONSTANTS from "./constants";
 
 export const App = () => {
     const {isLoggedIn} = useSelector(state => state.auth)
+    const {isRegisterIn} = useSelector(state => state.registration)
     const {login} = useActions()
 
     useEffect(() => {
-        if (localStorage.getItem('auth')) {
+        if (localStorage.getItem(CONSTANTS.AUTH)) {
             login()
         }
     }, [])
@@ -20,7 +22,7 @@ export const App = () => {
     return (
         <>
             {
-                isLoggedIn ?
+                isLoggedIn || isRegisterIn ?
                     <>
                         <Header/>
                         <MapLayout>

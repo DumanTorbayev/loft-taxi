@@ -1,11 +1,9 @@
 import {put, takeEvery, call} from 'redux-saga/effects';
-import {authorization} from "../../api";
-import {AuthActionCreators, AuthActionType} from "../actions/auth";
+import {authorization} from "../../../api";
+import {AuthActionCreators, AuthActionType} from "../../actions/auth";
+import {setToken} from "../../../utils/setToken";
 
-const setToken = (token) => {
-    localStorage.setItem('accessToken', token)
-    localStorage.setItem('auth', 'true')
-}
+
 
 function* authorizationWorker(action) {
     const {data} = yield call(authorization, action.payload)
@@ -19,5 +17,5 @@ function* authorizationWorker(action) {
 }
 
 export function* authorizationWatcher() {
-   yield takeEvery(AuthActionType.SET_AUTH, authorizationWorker)
+    yield takeEvery(AuthActionType.SET_AUTH, authorizationWorker)
 }

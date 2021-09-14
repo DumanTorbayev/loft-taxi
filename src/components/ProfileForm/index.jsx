@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import './index.scss';
 import {FormControl, FormGroup, Input, InputLabel} from "@material-ui/core";
 import {DatePicker, MuiPickersUtilsProvider} from "@material-ui/pickers";
 import {Controller, useForm} from "react-hook-form";
@@ -7,25 +6,30 @@ import DateFnsUtils from "@date-io/date-fns";
 import InputMask from "react-input-mask";
 import {Button} from "../UI/Button";
 import {ErrorMessage} from "../UI/ErrorMessage";
-import {formattedDate} from "../../utils/formattedDate";
 import {useActions} from "../../hooks/useActions";
+import {useStyles} from "../../hooks/useStyles";
+import CONSTANTS from "../../constants";
+import {useSelector} from "react-redux";
 
 export const ProfileForm = () => {
+    const {card, isLoading} = useSelector(state => state.profile)
     const {handleSubmit, formState: {errors}, control} = useForm()
-    const [date, setDate] = useState(new Date())
-    const [cardNumber, setCardNumber] = useState('')
-    const [cvcNumber, setCvcNumber] = useState('')
-    const [expiryDate, setExpiryDate] = useState(formattedDate(date))
-    const {setUserCard} = useActions()
+    const [expiryDate, setExpiryDate] = useState(card.expiryDate ? card.expiryDate : new Date())
+    const [cardName, setCardName] = useState(card.cardName)
+    const [cardNumber, setCardNumber] = useState(card.cardNumber)
+    const [cvcNumber, setCvcNumber] = useState(card.cvc)
+    const {fetchUserCard} = useActions()
+    const classes = useStyles()
 
     const onSubmit = data => {
-        setUserCard(data)
+        data.token = localStorage.getItem(CONSTANTS.ACCESS_TOKEN)
+        fetchUserCard(data)
     }
 
     return (
         <div className="profile__form">
             <form onSubmit={handleSubmit(onSubmit)}>
-                <FormControl fullWidth={true} className="form__control">
+                <FormControl fullWidth={true} margin="normal">
                     <InputLabel htmlFor="cardName">Имя владельца*</InputLabel>
                     <Controller
                         name="cardName"
@@ -34,7 +38,11 @@ export const ProfileForm = () => {
                         render={({field: {onChange}}) => (
                             <Input
                                 id="cardName"
-                                onChange={e => onChange(e)}
+                                value={cardName}
+                                onChange={e => {
+                                    onChange(e.target.value)
+                                    setCardName(e.target.value)
+                                }}
                             />
                         )}
                     />
@@ -43,7 +51,7 @@ export const ProfileForm = () => {
                         <ErrorMessage>Это поле обязательное</ErrorMessage>
                     }
                 </FormControl>
-                <FormControl fullWidth={true} className="form__control">
+                <FormControl fullWidth={true} margin="normal">
                     <InputLabel htmlFor="cardNumber">Номер карты*</InputLabel>
                     <Controller
                         name="cardNumber"
@@ -68,8 +76,8 @@ export const ProfileForm = () => {
                         <ErrorMessage>Это поле обязательное</ErrorMessage>
                     }
                 </FormControl>
-                <FormGroup row={true} className="form__group">
-                    <FormControl>
+                <FormGroup row={true} className={classes.gap}>
+                    <FormControl margin="normal" className={classes.formControl}>
                         <MuiPickersUtilsProvider utils={DateFnsUtils}>
                             <Controller
                                 name="expiryDate"
@@ -83,12 +91,11 @@ export const ProfileForm = () => {
                                         views={["year", "month"]}
                                         label="MM/YY"
                                         format="MM/yy"
-                                        value={date}
+                                        value={expiryDate}
                                         minDate={new Date()}
                                         onChange={(value) => {
                                             onChange(value)
-                                            setDate(value)
-                                            setExpiryDate(formattedDate(value))
+                                            setExpiryDate(value)
                                         }}
                                     />
                                 )}
@@ -99,7 +106,7 @@ export const ProfileForm = () => {
                             <ErrorMessage>Это поле обязательное</ErrorMessage>
                         }
                     </FormControl>
-                    <FormControl>
+                    <FormControl margin="normal" className={classes.formControl}>
                         <InputLabel htmlFor="cvc">CVC*</InputLabel>
                         <Controller
                             name="cvc"
@@ -129,20 +136,8 @@ export const ProfileForm = () => {
                         }
                     </FormControl>
                 </FormGroup>
-                <Button>Сохранить</Button>
+                <Button preloader={isLoading} disabled={isLoading}>Сохранить</Button>
             </form>
-
-            <div className="profile__card">
-                <div className="profile__card-head">
-                    <img src={`${process.env.PUBLIC_URL}/images/card-icon.svg`} alt=""/>
-                    <div className="profile__card-expiryDate">{expiryDate}</div>
-                </div>
-                <div className="profile__card-number">{cardNumber === '' ? '0000 0000 0000 0000' : cardNumber}</div>
-                <div className="profile__card-footer">
-                    <img src={`${process.env.PUBLIC_URL}/images/chip-icon.svg`} alt=""/>
-                    <img src={`${process.env.PUBLIC_URL}/images/master-card.svg`} alt=""/>
-                </div>
-            </div>
         </div>
     );
 };

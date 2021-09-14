@@ -4,7 +4,7 @@ import {LoginForm} from "../../components/LoginForm";
 
 export const Login = () => {
     return (
-        <Card>
+        <Card title={'Войти'}>
             <LoginForm />
         </Card>
     );

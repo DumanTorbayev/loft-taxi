@@ -1,9 +1,11 @@
 import {AuthActionCreators} from "./auth";
-import {RegistrationActionCreators} from "./registration";
 import {ProfileActionCreators} from "./profile";
+import {OrderActionCreators} from "./order";
+import {RegistrationActionCreators} from "./registration";
 
 export const allActionCreators = {
     ...AuthActionCreators,
-    ...RegistrationActionCreators,
     ...ProfileActionCreators,
+    ...OrderActionCreators,
+    ...RegistrationActionCreators
 }

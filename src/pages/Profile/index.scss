@@ -10,8 +10,10 @@
   left: 0;
   background: linear-gradient(0deg, rgba(28, 26, 25, 0.5), rgba(28, 26, 25, 0.5));
 
-  .card {
-    padding: 59px 44px 169px;
+  &__form-container {
+    .card {
+      padding: 24px;
+    }
   }
 
   &__content {
@@ -33,9 +35,72 @@
 
   &__description {
     margin-top: 0;
-    margin-bottom: 51px;
+    margin-bottom: 24px;
     font-size: 18px;
     line-height: 21px;
     color: #7B7B7B;
+  }
+
+  &__alert {
+    .card {
+      padding: 90px 114px;
+    }
+
+    .profile__description {
+      margin-bottom: 28px;
+    }
+
+    .primary-btn {
+      max-width: 355px;
+    }
+  }
+
+  &__form {
+    display: flex;
+    align-items: flex-start;
+
+    form {
+      width: 100%;
+      max-width: 355px;
+
+      .error-message {
+        position: absolute;
+        bottom: -15px;
+      }
+    }
+
+    .primary-btn {
+      max-width: 353px;
+      margin-top: 32px;
+    }
+
+    .profile__card {
+      display: flex;
+      flex-direction: column;
+      width: 347px;
+      height: 182px;
+      padding: 18px 16px 18px 28px;
+      background: #FFFFFF;
+      box-shadow: 0 5px 20px 2px rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+
+      &-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      &-number {
+        margin: auto 0;
+        font-size: 21px;
+        line-height: 25px;
+      }
+
+      &-footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+    }
   }
 }

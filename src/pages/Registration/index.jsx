@@ -4,7 +4,7 @@ import {RegistrationForm} from "../../components/RegistrationForm";
 
 export const Registration = () => {
     return (
-        <Card>
+        <Card title={'Регистрация'}>
             <RegistrationForm/>
         </Card>
     );

@@ -1,6 +1,7 @@
 import React, {useEffect, useRef, useState} from 'react';
 import './index.scss';
 import mapbox from "mapbox-gl";
+import {useSelector} from "react-redux";
 
 mapbox.accessToken = process.env.REACT_APP_MAPBOX_TOKEN
 
@@ -10,6 +11,49 @@ export const MapLayout = ({children}) => {
     const [lng, setLng] = useState(30.319814);
     const [lat, setLat] = useState(59.886215);
     const [zoom, setZoom] = useState(9);
+    const {coordinates} = useSelector(state => state.order)
+
+    const drawRoute = (map, coordinates) => {
+        if(coordinates.length !== 0) {
+            map.flyTo({
+                center: coordinates[0],
+                zoom: 15
+            });
+
+            map.addLayer({
+                id: "route",
+                type: "line",
+                source: {
+                    type: "geojson",
+                    data: {
+                        type: "Feature",
+                        properties: {},
+                        geometry: {
+                            type: "LineString",
+                            coordinates
+                        }
+                    }
+                },
+                layout: {
+                    "line-join": "round",
+                    "line-cap": "round"
+                },
+                paint: {
+                    "line-color": "#ffc617",
+                    "line-width": 8
+                }
+            });
+        } else {
+            if(map.getLayer('route')) {
+                map.removeLayer('route')
+                map.removeSource('route')
+                map.flyTo({
+                    center: [lng, lat],
+                    zoom: 9,
+                })
+            }
+        }
+    };
 
     useEffect(() => {
         if (map.current) return;
@@ -29,6 +73,10 @@ export const MapLayout = ({children}) => {
             setZoom(map.current.getZoom().toFixed(2));
         });
     });
+
+    useEffect(() => {
+        drawRoute(map.current, coordinates)
+    }, [coordinates])
 
     return (
         <main className="map-layout">
