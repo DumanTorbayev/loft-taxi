@@ -2,7 +2,6 @@ import React from 'react';
 import './index.scss'
 import {NavLink} from "react-router-dom";
 import {useActions} from "../../hooks/useActions";
-import CONSTANTS from "../../constants";
 
 export const Header = () => {
     const {logout} = useActions()
@@ -10,7 +9,7 @@ export const Header = () => {
     const handleLogout = e => {
         e.preventDefault()
         logout()
-        localStorage.removeItem(CONSTANTS.AUTH)
+        localStorage.clear()
     }
 
     return (

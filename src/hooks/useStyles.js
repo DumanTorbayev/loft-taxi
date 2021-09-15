@@ -12,6 +12,6 @@ export const useStyles = makeStyles({
         top: 'calc(50% - 12.5px)',
         left: 'calc(50% - 12.5px)',
         marginRight: '16px',
-        color: '#000',
+        color: '#FDBF5A',
     }
 })

@@ -2,7 +2,7 @@ export const ProfileActionType = {
     FETCH_USER_CARD: 'FETCH_USER_CARD',
     FETCH_CARD: 'FETCH_CARD',
     SET_CARD: 'SET_CARD',
-    IS_SUCCESS: 'IS_SUCCESS',
+    SET_SUCCESS: 'SET_SUCCESS',
     SET_ERROR: 'SET_ERROR',
 }
 
@@ -16,7 +16,7 @@ export const ProfileActionCreators = {
         payload: card
     }),
     fetchCard: () => ({type: ProfileActionType.FETCH_CARD}),
-    setSuccess: boolean => ({type: ProfileActionType.IS_SUCCESS, payload: boolean}),
+    setSuccess: boolean => ({type: ProfileActionType.SET_SUCCESS, payload: boolean}),
     setError: message => ({
         type: ProfileActionType.SET_ERROR,
         payload: message

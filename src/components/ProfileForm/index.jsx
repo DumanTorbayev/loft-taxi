@@ -14,10 +14,10 @@ import {useSelector} from "react-redux";
 export const ProfileForm = () => {
     const {card, isLoading} = useSelector(state => state.profile)
     const {handleSubmit, formState: {errors}, control} = useForm()
-    const [expiryDate, setExpiryDate] = useState(card.expiryDate ? card.expiryDate : new Date())
-    const [cardName, setCardName] = useState(card.cardName)
-    const [cardNumber, setCardNumber] = useState(card.cardNumber)
-    const [cvcNumber, setCvcNumber] = useState(card.cvc)
+    const [expiryDate, setExpiryDate] = useState(card ? card.expiryDate : new Date())
+    const [cardName, setCardName] = useState(card ? card.cardName : '')
+    const [cardNumber, setCardNumber] = useState(card ? card.cardNumber : '')
+    const [cvcNumber, setCvcNumber] = useState(card ? card.cvc : '')
     const {fetchUserCard} = useActions()
     const classes = useStyles()
 

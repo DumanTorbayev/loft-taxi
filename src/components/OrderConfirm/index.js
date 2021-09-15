@@ -5,6 +5,7 @@ import {useActions} from "../../hooks/useActions";
 
 export const OrderConfirm = () => {
     const {setRoutes} = useActions()
+
     const onNewOrder = () => {
         setRoutes([])
     }

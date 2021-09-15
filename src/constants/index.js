@@ -1,6 +1,7 @@
 const CONSTANTS = {
     ACCESS_TOKEN: 'ACCESS_TOKEN',
-    AUTH: 'AUTH'
+    AUTH: 'AUTH',
+    IS_CARD: 'IS_CARD',
 }
 
 export default CONSTANTS

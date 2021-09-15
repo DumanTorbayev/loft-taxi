@@ -7,6 +7,7 @@ import {OrderConfirm} from "../../components/OrderConfirm";
 import {Card} from "../../components/UI/Card";
 import {Button} from "../../components/UI/Button";
 import {useHistory} from "react-router-dom";
+import CONSTANTS from "../../constants";
 
 export const Order = () => {
     const {fetchAddressList, fetchCard} = useActions()
@@ -21,7 +22,7 @@ export const Order = () => {
 
     return (
         <div className="order">
-            {Object.keys(card).length !== 0
+            {card || localStorage.getItem(CONSTANTS.IS_CARD)
                 ? coordinates.length === 0
                     ? <OrderForm/>
                     : <OrderConfirm/>

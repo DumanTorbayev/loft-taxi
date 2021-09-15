@@ -2,6 +2,7 @@ import React from 'react';
 import './index.scss'
 import {CircularProgress} from "@material-ui/core";
 import {useStyles} from "../../../hooks/useStyles";
+import PropTypes from "prop-types";
 
 export const Button = ({children, onClick, disabled, preloader}) => {
     const classes = useStyles()
@@ -17,3 +18,10 @@ export const Button = ({children, onClick, disabled, preloader}) => {
         </button>
     );
 };
+
+Button.propTypes = {
+    children: PropTypes.node,
+    onClick: PropTypes.func,
+    disabled: PropTypes.bool,
+    preloader: PropTypes.bool,
+}

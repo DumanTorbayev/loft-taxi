@@ -4,7 +4,7 @@ import {privateRoutes, publicRoutes, ROUTES_PATH} from "./routes";
 import {AuthLayout} from "./components/AuthLayout";
 import {Header} from "./components/Header";
 import {useSelector} from "react-redux";
-import {MapLayout} from "./components/MapLayout";
+import {MapContainer} from "./components/MapContainer";
 import {useActions} from "./hooks/useActions";
 import CONSTANTS from "./constants";
 
@@ -25,14 +25,14 @@ export const App = () => {
                 isLoggedIn ?
                     <>
                         <Header/>
-                        <MapLayout>
+                        <MapContainer>
                             <Switch>
                                 {privateRoutes.map(({path, exact, component}) => (
                                     <Route key={path} path={path} exact={exact} component={component}/>
                                 ))}
                                 <Redirect to={ROUTES_PATH.order}/>
                             </Switch>
-                        </MapLayout>
+                        </MapContainer>
                     </>
                     :
                     <AuthLayout>

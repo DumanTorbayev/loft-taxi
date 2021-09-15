@@ -1,5 +1,6 @@
 import React from 'react';
 import './index.scss'
+import PropTypes from "prop-types";
 
 export const Card = ({children}) => {
     return (
@@ -8,3 +9,7 @@ export const Card = ({children}) => {
         </div>
     );
 };
+
+Card.propTypes = {
+    children: PropTypes.node
+}

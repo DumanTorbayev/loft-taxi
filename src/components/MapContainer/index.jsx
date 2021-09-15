@@ -2,10 +2,9 @@ import React, {useEffect, useRef, useState} from 'react';
 import './index.scss';
 import mapbox from "mapbox-gl";
 import {useSelector} from "react-redux";
+import PropTypes from "prop-types";
 
-mapbox.accessToken = process.env.REACT_APP_MAPBOX_TOKEN
-
-export const MapLayout = ({children}) => {
+export const MapContainer = ({children}) => {
     const mapContainer = useRef(null)
     const map = useRef(null)
     const [lng, setLng] = useState(30.319814);
@@ -56,6 +55,8 @@ export const MapLayout = ({children}) => {
     };
 
     useEffect(() => {
+        mapbox.accessToken = process.env.REACT_APP_MAPBOX_TOKEN
+
         if (map.current) return;
         map.current = new mapbox.Map({
             container: mapContainer.current,
@@ -85,3 +86,7 @@ export const MapLayout = ({children}) => {
         </main>
     );
 };
+
+MapContainer.propTypes = {
+    children: PropTypes.node
+}
