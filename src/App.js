@@ -7,10 +7,10 @@ import {useSelector} from "react-redux";
 import {MapContainer} from "./components/MapContainer";
 import {useActions} from "./hooks/useActions";
 import CONSTANTS from "./constants";
+import {getIsLoggedIn} from "./store/selectors";
 
 export const App = () => {
-    const {isLoggedIn} = useSelector(state => state.auth)
-    const {isRegisterIn} = useSelector(state => state.registration)
+    const isLoggedIn = useSelector(state => getIsLoggedIn(state.auth))
     const {login} = useActions()
 
     useEffect(() => {
@@ -41,7 +41,6 @@ export const App = () => {
                                 <Route key={path} path={path} exact={exact} component={component}/>
                             ))}
                             <Redirect to={ROUTES_PATH.login}/>
-                            {isRegisterIn && <Redirect to={ROUTES_PATH.login}/>}
                         </Switch>
                     </AuthLayout>
             }

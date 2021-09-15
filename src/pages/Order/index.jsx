@@ -8,11 +8,12 @@ import {Card} from "../../components/UI/Card";
 import {Button} from "../../components/UI/Button";
 import {useHistory} from "react-router-dom";
 import CONSTANTS from "../../constants";
+import {getCard, getCoordinates} from "../../store/selectors";
 
 export const Order = () => {
     const {fetchAddressList, fetchCard} = useActions()
-    const {coordinates} = useSelector(state => state.order)
-    const {card} = useSelector(state => state.profile)
+    const coordinates = useSelector(state => getCoordinates(state.order))
+    const card = useSelector(state => getCard(state.profile))
     const history = useHistory()
 
     useState(() => {

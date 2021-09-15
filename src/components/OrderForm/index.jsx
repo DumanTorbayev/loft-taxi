@@ -5,10 +5,12 @@ import {FormControl, InputLabel, MenuItem, Select} from "@material-ui/core";
 import {Button} from "../UI/Button";
 import {useSelector} from "react-redux";
 import {useActions} from "../../hooks/useActions";
+import {getAddresses, getIsLoading} from "../../store/selectors";
 
 export const OrderForm = () => {
     const {register, handleSubmit} = useForm()
-    const {addresses, isLoading} = useSelector(state => state.order)
+    const addresses = useSelector(state => getAddresses(state.order))
+    const isLoading = useSelector(state => getIsLoading(state.order))
     const [from, setFrom] = useState('')
     const [to, setTo] = useState('')
     const {getRoutes} = useActions()

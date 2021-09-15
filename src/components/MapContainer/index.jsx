@@ -3,6 +3,7 @@ import './index.scss';
 import mapbox from "mapbox-gl";
 import {useSelector} from "react-redux";
 import PropTypes from "prop-types";
+import {getCoordinates} from "../../store/selectors";
 
 export const MapContainer = ({children}) => {
     const mapContainer = useRef(null)
@@ -10,7 +11,7 @@ export const MapContainer = ({children}) => {
     const [lng, setLng] = useState(30.319814);
     const [lat, setLat] = useState(59.886215);
     const [zoom, setZoom] = useState(9);
-    const {coordinates} = useSelector(state => state.order)
+    const coordinates = useSelector(state => getCoordinates(state.order))
 
     const drawRoute = (map, coordinates) => {
         if(coordinates.length !== 0) {

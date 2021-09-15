@@ -10,13 +10,16 @@ import {useStyles} from "../../hooks/useStyles";
 import {useSelector} from "react-redux";
 import {Alert} from "@material-ui/lab";
 import usePortal from "react-useportal";
+import {getError, getIsLoading, getIsRegister} from "../../store/selectors";
 
 export const RegistrationForm = () => {
     const {register, handleSubmit, formState: {errors}} = useForm()
     const {setRegistration} = useActions()
     const classes = useStyles()
-    const {isLoading, error, isRegisterIn} = useSelector(state => state.registration)
-    const { Portal } = usePortal({
+    const isRegisterIn = useSelector(state => getIsRegister(state.registration))
+    const isLoading = useSelector(state => getIsLoading(state.registration))
+    const error = useSelector(state => getError(state.registration))
+    const {Portal} = usePortal({
         bindTo: document && document.getElementById('alert-portal')
     })
 
@@ -37,7 +40,8 @@ export const RegistrationForm = () => {
                             pattern: /^\S+@\S+$/i,
                         })}
                     />
-                    {errors.email && errors.email.type === "required" && <ErrorMessage>Это поле обязательное</ErrorMessage>}
+                    {errors.email && errors.email.type === "required" &&
+                    <ErrorMessage>Это поле обязательное</ErrorMessage>}
                     {errors.email && errors.email.type === "pattern" && <ErrorMessage>Некорректный email</ErrorMessage>}
                 </FormControl>
                 <FormGroup row={true} className={classes.gap}>

@@ -9,11 +9,13 @@ import {FormControl, Input, InputLabel} from "@material-ui/core";
 import {useSelector} from "react-redux";
 import {Alert} from "@material-ui/lab";
 import usePortal from "react-useportal";
+import {getError, getIsLoading} from "../../store/selectors";
 
 export const LoginForm = () => {
     const {register, handleSubmit, formState: {errors}} = useForm()
     const {setAuth} = useActions()
-    const {isLoading, error} = useSelector(state => state.auth)
+    const isLoading = useSelector(state => getIsLoading(state.auth))
+    const error = useSelector(state => getError(state.auth))
     const { Portal } = usePortal({
         bindTo: document && document.getElementById('alert-portal')
     })

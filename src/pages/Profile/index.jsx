@@ -6,9 +6,10 @@ import {useSelector} from "react-redux";
 import {Button} from "../../components/UI/Button";
 import {useHistory} from "react-router-dom";
 import {useActions} from "../../hooks/useActions";
+import {getIsSuccess} from "../../store/selectors";
 
 export const Profile = () => {
-    const {isSuccess} = useSelector(state => state.profile)
+    const isSuccess = useSelector(state => getIsSuccess(state.profile))
     const history = useHistory()
     const {setSuccess} = useActions()
 

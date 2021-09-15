@@ -10,9 +10,11 @@ import {useActions} from "../../hooks/useActions";
 import {useStyles} from "../../hooks/useStyles";
 import CONSTANTS from "../../constants";
 import {useSelector} from "react-redux";
+import {getCard, getIsLoading} from "../../store/selectors";
 
 export const ProfileForm = () => {
-    const {card, isLoading} = useSelector(state => state.profile)
+    const card = useSelector(state => getCard(state.profile))
+    const isLoading = useSelector(state => getIsLoading(state.profile))
     const {handleSubmit, formState: {errors}, control} = useForm()
     const [expiryDate, setExpiryDate] = useState(card ? card.expiryDate : new Date())
     const [cardName, setCardName] = useState(card ? card.cardName : '')
