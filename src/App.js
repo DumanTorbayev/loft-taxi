@@ -22,7 +22,7 @@ export const App = () => {
     return (
         <>
             {
-                isLoggedIn || isRegisterIn ?
+                isLoggedIn ?
                     <>
                         <Header/>
                         <MapLayout>
@@ -41,6 +41,7 @@ export const App = () => {
                                 <Route key={path} path={path} exact={exact} component={component}/>
                             ))}
                             <Redirect to={ROUTES_PATH.login}/>
+                            {isRegisterIn && <Redirect to={ROUTES_PATH.login}/>}
                         </Switch>
                     </AuthLayout>
             }

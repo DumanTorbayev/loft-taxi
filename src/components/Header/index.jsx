@@ -5,12 +5,11 @@ import {useActions} from "../../hooks/useActions";
 import CONSTANTS from "../../constants";
 
 export const Header = () => {
-    const {logout, logoutReg} = useActions()
+    const {logout} = useActions()
 
     const handleLogout = e => {
         e.preventDefault()
         logout()
-        logoutReg()
         localStorage.removeItem(CONSTANTS.AUTH)
     }
 
