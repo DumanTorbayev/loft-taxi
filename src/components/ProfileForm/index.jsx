@@ -15,7 +15,7 @@ import {getCard, getIsLoading} from "../../store/selectors";
 export const ProfileForm = () => {
     const card = useSelector(state => getCard(state.profile))
     const isLoading = useSelector(state => getIsLoading(state.profile))
-    const {handleSubmit, formState: {errors}, control} = useForm()
+    const {handleSubmit, formState: {errors}, control, register} = useForm()
     const [expiryDate, setExpiryDate] = useState(card ? card.expiryDate : new Date())
     const [cardName, setCardName] = useState(card ? card.cardName : '')
     const [cardNumber, setCardNumber] = useState(card ? card.cardNumber : '')
@@ -36,7 +36,7 @@ export const ProfileForm = () => {
                     <Controller
                         name="cardName"
                         control={control}
-                        rules={{required: true}}
+                        rules={{required: {value: true, message: 'Это поле обязательное'}}}
                         render={({field: {onChange}}) => (
                             <Input
                                 id="cardName"
@@ -48,17 +48,12 @@ export const ProfileForm = () => {
                             />
                         )}
                     />
-                    {
-                        errors.cardName && errors.cardName.type === "required" &&
-                        <ErrorMessage>Это поле обязательное</ErrorMessage>
-                    }
+                    {errors.cardName && <ErrorMessage>{errors.cardName.message}</ErrorMessage>}
                 </FormControl>
                 <FormControl fullWidth={true} margin="normal">
                     <InputLabel htmlFor="cardNumber">Номер карты*</InputLabel>
                     <Controller
-                        name="cardNumber"
                         control={control}
-                        rules={{required: true}}
                         render={({field: {onChange}}) => (
                             <InputMask
                                 mask="9999 9999 9999 9999"
@@ -72,11 +67,13 @@ export const ProfileForm = () => {
                                 {inputProps => <Input id="cardNumber" {...inputProps}/>}
                             </InputMask>
                         )}
+                        name="cardNumber"
+                        rules={{
+                            required: {value: true, message: 'Это поле обязательное'},
+                            minLength: {value: 16, message: 'Должно быть минимум 16 символа'}
+                        }}
                     />
-                    {
-                        errors.cardNumber && errors.cardNumber.type === "required" &&
-                        <ErrorMessage>Это поле обязательное</ErrorMessage>
-                    }
+                    {errors.cardNumber && <ErrorMessage>{errors.cardNumber.message}</ErrorMessage>}
                 </FormControl>
                 <FormGroup row={true} className={classes.gap}>
                     <FormControl margin="normal" className={classes.formControl}>
@@ -84,7 +81,7 @@ export const ProfileForm = () => {
                             <Controller
                                 name="expiryDate"
                                 control={control}
-                                rules={{required: true}}
+                                rules={{required: {value: true, message: 'Это поле обязательное'}}}
                                 render={({field: {onChange}}) => (
                                     <DatePicker
                                         autoOk={true}
@@ -103,18 +100,13 @@ export const ProfileForm = () => {
                                 )}
                             />
                         </MuiPickersUtilsProvider>
-                        {
-                            errors.expiryDate && errors.expiryDate.type === "required" &&
-                            <ErrorMessage>Это поле обязательное</ErrorMessage>
-                        }
+                        {errors.expiryDate && <ErrorMessage>{errors.expiryDate.message}</ErrorMessage>}
                     </FormControl>
                     <FormControl margin="normal" className={classes.formControl}>
                         <InputLabel htmlFor="cvc">CVC*</InputLabel>
                         <Controller
-                            name="cvc"
                             control={control}
-                            rules={{required: true, minLength: {value: 3}}}
-                            render={({field: {onChange}}) => (
+                            render={({field: {onChange, ref}}) => (
                                 <InputMask
                                     mask="999"
                                     value={cvcNumber}
@@ -127,15 +119,13 @@ export const ProfileForm = () => {
                                     {() => <Input id="cvc"/>}
                                 </InputMask>
                             )}
+                            name="cvc"
+                            rules={{
+                                required: {value: true, message: 'Это поле обязательное'},
+                                minLength: {value: 3, message: 'Должно быть минимум 3 символа'}
+                            }}
                         />
-                        {
-                            errors.cvc && errors.cvc.type === "required" &&
-                            <ErrorMessage>Это поле обязательное</ErrorMessage>
-                        }
-                        {
-                            errors.cvc && errors.cvc.type === "minLength" &&
-                            <ErrorMessage>Это поле обязательное</ErrorMessage>
-                        }
+                        {errors.cvc && <ErrorMessage>{errors.cvc.message}</ErrorMessage>}
                     </FormControl>
                 </FormGroup>
                 <Button preloader={isLoading} disabled={isLoading}>Сохранить</Button>

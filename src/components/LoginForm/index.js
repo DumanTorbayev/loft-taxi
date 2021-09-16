@@ -16,9 +16,11 @@ export const LoginForm = () => {
     const {setAuth} = useActions()
     const isLoading = useSelector(state => getIsLoading(state.auth))
     const error = useSelector(state => getError(state.auth))
-    const { Portal } = usePortal({
+    const {Portal} = usePortal({
         bindTo: document && document.getElementById('alert-portal')
     })
+
+    console.log(errors);
 
     const onSubmit = data => {
         setAuth(data)
@@ -33,22 +35,22 @@ export const LoginForm = () => {
                     <Input
                         id="email"
                         {...register("email", {
-                            required: true,
-                            pattern: /^\S+@\S+$/i,
+                            required: {value: true, message: 'Это поле обязательное'},
+                            pattern: {value: /^\S+@\S+$/i, message: 'Некорректный email'},
                         })}
                     />
-                    {errors.email && errors.email.type === "required" &&
-                    <ErrorMessage>Это поле обязательное</ErrorMessage>}
-                    {errors.email && errors.email.type === "pattern" && <ErrorMessage>Некорректный email</ErrorMessage>}
+                    {errors.email && <ErrorMessage>{errors.email.message}</ErrorMessage>}
                 </FormControl>
                 <FormControl fullWidth={true} margin="normal">
                     <InputLabel htmlFor="password">Пароль*</InputLabel>
                     <Input
                         id="password"
                         type="password"
-                        {...register("password", {required: true,})}
+                        {...register("password", {
+                            required: {value: true, message: 'Это поле обязательное'},
+                        })}
                     />
-                    {errors.password && <ErrorMessage>Это поле обязательное</ErrorMessage>}
+                    {errors.password && <ErrorMessage>{errors.password.message}</ErrorMessage>}
                 </FormControl>
                 <a href="#" className="form__restore-password">Забыли пароль?</a>
 

@@ -36,32 +36,32 @@ export const RegistrationForm = () => {
                     <Input
                         id="email"
                         {...register("email", {
-                            required: true,
-                            pattern: /^\S+@\S+$/i,
+                            required: {value: true, message: 'Это поле обязательное'},
+                            pattern: {value: /^\S+@\S+$/i, message: 'Некорректный email'},
                         })}
                     />
-                    {errors.email && errors.email.type === "required" &&
-                    <ErrorMessage>Это поле обязательное</ErrorMessage>}
-                    {errors.email && errors.email.type === "pattern" && <ErrorMessage>Некорректный email</ErrorMessage>}
+                    {errors.email && <ErrorMessage>{errors.email.message}</ErrorMessage>}
                 </FormControl>
                 <FormGroup row={true} className={classes.gap}>
                     <FormControl margin="normal" className={classes.formControl}>
                         <InputLabel htmlFor="name">Имя*</InputLabel>
                         <Input
                             id="name"
-                            {...register("name", {required: true,})}
+                            {...register("name", {
+                                required: {value: true, message: 'Это поле обязательное'},
+                            })}
                         />
-                        {errors.name && errors.name.type === "required" &&
-                        <ErrorMessage>Это поле обязательное</ErrorMessage>}
+                        {errors.name && <ErrorMessage>{errors.name.message}</ErrorMessage>}
                     </FormControl>
                     <FormControl margin="normal" className={classes.formControl}>
                         <InputLabel htmlFor="surname">Фамилия*</InputLabel>
                         <Input
                             id="surname"
-                            {...register("surname", {required: true,})}
+                            {...register("surname", {
+                                required: {value: true, message: 'Это поле обязательное'},
+                            })}
                         />
-                        {errors.surname && errors.surname.type === "required" &&
-                        <ErrorMessage>Это поле обязательное</ErrorMessage>}
+                        {errors.surname && <ErrorMessage>{errors.surname.message}</ErrorMessage>}
                     </FormControl>
                 </FormGroup>
                 <FormControl fullWidth={true} margin="normal">
@@ -69,10 +69,11 @@ export const RegistrationForm = () => {
                     <Input
                         id="password"
                         type="password"
-                        {...register("password", {required: true,})}
+                        {...register("password", {
+                            required: {value: true, message: 'Это поле обязательное'},
+                        })}
                     />
-                    {errors.password && errors.password.type === "required" &&
-                    <ErrorMessage>Это поле обязательное</ErrorMessage>}
+                    {errors.password && <ErrorMessage>{errors.password.message}</ErrorMessage>}
                 </FormControl>
 
                 <Button preloader={isLoading} disabled={isLoading}>Зарегистрироваться</Button>
