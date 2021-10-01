@@ -1,7 +1,10 @@
 import React from 'react';
-import './index.scss'
+import styles from './header.module.scss'
+import logo from '../../assets/images/logo-h.svg'
 import {NavLink} from "react-router-dom";
 import {useActions} from "../../hooks/useActions";
+import {routesPath} from "../RootRouter";
+import CONSTANTS from "../../constants";
 
 export const Header = () => {
     const {logout} = useActions()
@@ -9,36 +12,37 @@ export const Header = () => {
     const handleLogout = e => {
         e.preventDefault()
         logout()
-        localStorage.clear()
+        localStorage.removeItem(CONSTANTS.ACCESS_TOKEN)
+        localStorage.removeItem(CONSTANTS.AUTH)
     }
 
     return (
-        <header className="header">
-            <nav className="navbar">
-                <div className="navbar__brand">
-                    <img src={`${process.env.PUBLIC_URL}/images/logo-h.svg`} alt="Loft taxi"/>
+        <header className={styles.header}>
+            <nav className={styles.navbar}>
+                <div className={styles['navbar__brand']}>
+                    <img src={logo} alt="Loft taxi"/>
                 </div>
-                <ul className="navbar__list">
-                    <li className="navbar__item">
+                <ul className={styles['navbar__list']}>
+                    <li className={styles['navbar__item']}>
                         <NavLink
-                            to="/main/order"
-                            activeClassName="navbar__link--active"
-                            className="navbar__link"
+                            to={routesPath.order}
+                            activeClassName={styles['navbar__link--active']}
+                            className={styles['navbar__link']}
                         >
                             Карта
                         </NavLink>
                     </li>
-                    <li className="navbar__item">
+                    <li className={styles['navbar__item']}>
                         <NavLink
-                            to="/main/profile"
-                            activeClassName="navbar__link--active"
-                            className="navbar__link"
+                            to={routesPath.profile}
+                            activeClassName={styles['navbar__link--active']}
+                            className={styles['navbar__link']}
                         >
                             Профиль
                         </NavLink>
                     </li>
-                    <li className="navbar__item">
-                        <a href="#" onClick={handleLogout} className="navbar__link">Выйти</a>
+                    <li className={styles['navbar__item']}>
+                        <a href="#" onClick={handleLogout} className={styles['navbar__link']}>Выйти</a>
                     </li>
                 </ul>
             </nav>

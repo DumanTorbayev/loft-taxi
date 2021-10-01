@@ -1,0 +1,28 @@
+.container {
+  display: flex;
+  align-items: flex-start;
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  padding: 48px;
+}
+
+.orderPopup {
+  max-width: 345px;
+  margin: 36px 36px 20px;
+}
+
+.title {
+  margin-top: 0;
+  margin-bottom: 14px;
+  font-weight: bold;
+  font-size: 36px;
+  line-height: 42px;
+}
+
+.descr {
+  font-size: 18px;
+  line-height: 21px;
+  color: #7B7B7B;
+}

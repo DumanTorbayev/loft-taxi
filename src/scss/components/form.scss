@@ -6,31 +6,16 @@
   min-width: 355px;
   margin: 56px 112.5px;
 
-  .error-message {
-    position: absolute;
-    bottom: -14px;
-    left: 0;
-  }
-
-  .primary-btn {
-    margin-bottom: 33px;
-  }
-
-  &--registration {
-    .primary-btn {
-      margin-top: 50px;
-    }
-  }
-
   &--order {
-    width: 100%;
     min-width: auto;
-    margin: 0;
+    width: 398px;
+    margin: 36px 42px 20px;
+  }
 
-    .primary-btn {
-      margin-bottom: 0;
-      margin-top: 30px;
-    }
+  &--profile {
+    width: 100%;
+    max-width: 355px;
+    margin: 0;
   }
 
   &__title {

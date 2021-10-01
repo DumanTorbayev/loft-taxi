@@ -1,14 +1,15 @@
 import React from 'react';
-import './index.scss';
+import styles from './auth-layout.module.scss';
+import logo from '../../assets/images/logo-v.svg';
 import PropTypes from "prop-types";
 
 export const AuthLayout = ({children}) => {
     return (
-        <div className={'auth-container'}>
-            <div className="auth-lc">
-                <img src={`${process.env.PUBLIC_URL}/images/logo-v.svg`} alt="Loft taxi" className="auth-logo"/>
+        <div className={styles.container}>
+            <div className={styles.lc}>
+                <img src={logo} alt="Loft taxi" className={styles.logo}/>
             </div>
-            <div className="auth-rc" style={{backgroundImage: `url(${process.env.PUBLIC_URL}/images/map.png)`}}>
+            <div className={styles.rc}>
                 {children}
             </div>
         </div>
@@ -16,5 +17,5 @@ export const AuthLayout = ({children}) => {
 };
 
 AuthLayout.propTypes = {
-    children: PropTypes.node
+    children: PropTypes.node.isRequired
 }

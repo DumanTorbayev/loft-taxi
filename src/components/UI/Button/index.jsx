@@ -1,5 +1,5 @@
 import React from 'react';
-import './index.scss'
+import styles from'./button.module.scss'
 import {CircularProgress} from "@material-ui/core";
 import {useStyles} from "../../../hooks/useStyles";
 import PropTypes from "prop-types";
@@ -11,7 +11,7 @@ export const Button = ({children, onClick, disabled, preloader}) => {
         <button
             onClick={onClick}
             disabled={disabled}
-            className={`primary-btn ${disabled ? 'primary-btn--disabled' : ''}`}
+            className={`${styles.primary} ${disabled ? styles['primary--disabled'] : ''}`}
         >
             {preloader ? <CircularProgress size={25} className={classes.btnPreloader}/> : null}
             {children}
@@ -20,7 +20,7 @@ export const Button = ({children, onClick, disabled, preloader}) => {
 };
 
 Button.propTypes = {
-    children: PropTypes.node,
+    children: PropTypes.node.isRequired,
     onClick: PropTypes.func,
     disabled: PropTypes.bool,
     preloader: PropTypes.bool,

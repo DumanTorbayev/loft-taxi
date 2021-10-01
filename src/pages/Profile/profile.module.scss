@@ -1,0 +1,48 @@
+.profile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-image: linear-gradient(0deg, rgba(28, 26, 25, 0.5), rgba(28, 26, 25, 0.5)),
+  url("../../assets/images/map-bg.png");
+  background-repeat: no-repeat;
+  background-position: 50%;
+  background-size: cover;
+}
+
+.content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 801px;
+  padding: 36px 48px;
+}
+
+.title {
+  margin-top: 0;
+  margin-bottom: 13px;
+  font-weight: bold;
+  font-size: 36px;
+  line-height: 42px;
+}
+
+.description {
+  margin-top: 0;
+  margin-bottom: 24px;
+  font-size: 18px;
+  line-height: 21px;
+  color: #7B7B7B;
+}
+
+.alert {
+  .profile__description {
+    margin-bottom: 28px;
+  }
+}

@@ -1,3 +1,6 @@
-@import "fonts/fonts";
+@import "utils/mixins";
+@import "utils/vars";
+
+@import "base/fonts";
 @import "base/base";
 @import "components/form";

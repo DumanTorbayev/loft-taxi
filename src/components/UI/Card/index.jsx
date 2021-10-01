@@ -1,15 +1,15 @@
 import React from 'react';
-import './index.scss'
+import styles from './card.module.scss'
 import PropTypes from "prop-types";
 
 export const Card = ({children}) => {
     return (
-        <div className="card">
+        <div className={styles.card}>
             {children}
         </div>
     );
 };
 
 Card.propTypes = {
-    children: PropTypes.node
+    children: PropTypes.node.isRequired
 }

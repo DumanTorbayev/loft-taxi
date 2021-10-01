@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import './index.scss';
+import styles from './order.module.scss';
 import {OrderForm} from "../../components/OrderForm";
 import {useActions} from "../../hooks/useActions";
 import {useSelector} from "react-redux";
@@ -9,34 +9,43 @@ import {Button} from "../../components/UI/Button";
 import {useHistory} from "react-router-dom";
 import CONSTANTS from "../../constants";
 import {getCard, getCoordinates} from "../../store/selectors";
+import {MapContainer} from "../../components/MapContainer";
+import {routesPath} from "../../components/RootRouter";
 
 export const Order = () => {
-    const {fetchAddressList, fetchCard} = useActions()
+    const {sagaFetchAddresses, sagaFetchCard} = useActions()
     const coordinates = useSelector(state => getCoordinates(state.order))
     const card = useSelector(state => getCard(state.profile))
     const history = useHistory()
 
     useState(() => {
-        fetchAddressList()
-        fetchCard()
+        sagaFetchAddresses()
+        sagaFetchCard()
     }, [])
 
+    const handleClick = () => {
+        history.push(routesPath.profile)
+    }
+
     return (
-        <div className="order">
-            {card || localStorage.getItem(CONSTANTS.IS_CARD)
-                ? coordinates.length === 0
-                    ? <OrderForm/>
-                    : <OrderConfirm/>
-                : <Card>
-                    <div className="order-add">
-                        <h2 className="order-add__title">Заполните профиль</h2>
-                        <p className="order-add__descr">
-                            У Вас в профиле на заполнены данные по карте. После заполнения, Вы сможете заказать такси
-                        </p>
-                        <Button onClick={() => history.push('/main/profile')}>Перейти в профиль</Button>
-                    </div>
-                </Card>
-            }
-        </div>
+        <MapContainer>
+            <div className={styles.container}>
+                {card || localStorage.getItem(CONSTANTS.IS_CARD)
+                    ? coordinates.length === 0
+                        ? <OrderForm/>
+                        : <OrderConfirm styles={styles}/>
+                    : <Card>
+                        <div className={styles.orderPopup}>
+                            <h2 className={styles.title}>Заполните профиль</h2>
+                            <p className={styles.descr}>
+                                У Вас в профиле на заполнены данные по карте. После заполнения, Вы сможете заказать
+                                такси
+                            </p>
+                            <Button onClick={handleClick}>Перейти в профиль</Button>
+                        </div>
+                    </Card>
+                }
+            </div>
+        </MapContainer>
     );
 };

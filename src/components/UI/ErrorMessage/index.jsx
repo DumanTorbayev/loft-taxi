@@ -1,15 +1,15 @@
 import React from 'react';
-import './index.scss'
+import styles from './error.module.scss'
 import PropTypes from "prop-types";
 
 export const ErrorMessage = ({children}) => {
     return (
-        <span className="error-message">
+        <span className={styles.message}>
             {children}
         </span>
     );
 };
 
 ErrorMessage.propTypes = {
-    children: PropTypes.node
+    children: PropTypes.node.isRequired
 }

@@ -2,7 +2,6 @@ import React from 'react';
 import {useForm} from "react-hook-form";
 import {Button} from "../UI/Button";
 import {Link} from "react-router-dom";
-import {ROUTES_PATH} from "../../routes";
 import {ErrorMessage} from "../UI/ErrorMessage";
 import {useActions} from "../../hooks/useActions";
 import {FormControl, Input, InputLabel} from "@material-ui/core";
@@ -10,6 +9,7 @@ import {useSelector} from "react-redux";
 import {Alert} from "@material-ui/lab";
 import usePortal from "react-useportal";
 import {getError, getIsLoading} from "../../store/selectors";
+import {routesPath} from "../RootRouter";
 
 export const LoginForm = () => {
     const {register, handleSubmit, formState: {errors}} = useForm()
@@ -19,8 +19,6 @@ export const LoginForm = () => {
     const {Portal} = usePortal({
         bindTo: document && document.getElementById('alert-portal')
     })
-
-    console.log(errors);
 
     const onSubmit = data => {
         setAuth(data)
@@ -58,7 +56,7 @@ export const LoginForm = () => {
 
                 <div className="form__redirect-btn">
                     Новый пользователь?
-                    <Link to={ROUTES_PATH.registration}>Регистрация</Link>
+                    <Link to={routesPath.registration}>Регистрация</Link>
                 </div>
             </form>
             {error && <Portal><Alert severity="error">{error}</Alert></Portal>}

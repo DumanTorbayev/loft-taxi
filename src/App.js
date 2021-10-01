@@ -1,16 +1,9 @@
 import React, {useEffect} from 'react';
-import {Switch, Route, Redirect} from "react-router-dom";
-import {privateRoutes, publicRoutes, ROUTES_PATH} from "./routes";
-import {AuthLayout} from "./components/AuthLayout";
-import {Header} from "./components/Header";
-import {useSelector} from "react-redux";
-import {MapContainer} from "./components/MapContainer";
 import {useActions} from "./hooks/useActions";
 import CONSTANTS from "./constants";
-import {getIsLoggedIn} from "./store/selectors";
+import {RootRouter} from "./components/RootRouter";
 
 export const App = () => {
-    const isLoggedIn = useSelector(state => getIsLoggedIn(state.auth))
     const {login} = useActions()
 
     useEffect(() => {
@@ -20,30 +13,6 @@ export const App = () => {
     }, [])
 
     return (
-        <>
-            {
-                isLoggedIn ?
-                    <>
-                        <Header/>
-                        <MapContainer>
-                            <Switch>
-                                {privateRoutes.map(({path, exact, component}) => (
-                                    <Route key={path} path={path} exact={exact} component={component}/>
-                                ))}
-                                <Redirect to={ROUTES_PATH.order}/>
-                            </Switch>
-                        </MapContainer>
-                    </>
-                    :
-                    <AuthLayout>
-                        <Switch>
-                            {publicRoutes.map(({path, exact, component}) => (
-                                <Route key={path} path={path} exact={exact} component={component}/>
-                            ))}
-                            <Redirect to={ROUTES_PATH.login}/>
-                        </Switch>
-                    </AuthLayout>
-            }
-        </>
+        <RootRouter/>
     );
 };

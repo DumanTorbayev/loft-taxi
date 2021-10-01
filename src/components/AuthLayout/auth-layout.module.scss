@@ -1,0 +1,31 @@
+.container {
+  display: flex;
+  min-height: 100vh;
+  background-image: url(../../assets/images/map-bg.png);
+  background-repeat: no-repeat;
+  background-position: 50%;
+  background-size: cover;
+}
+
+.lc,
+.rc {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.lc {
+  max-width: 485px;
+  background-color: #1C1A19;
+}
+
+.rc {
+  background-repeat: no-repeat;
+  background-position: 50%;
+  background-size: cover;
+}
+
+.logo {
+  width: 192px;
+}

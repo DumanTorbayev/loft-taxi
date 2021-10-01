@@ -24,7 +24,7 @@ export const OrderForm = () => {
     }
 
     const onSubmit = data => {
-        getRoutes(data);
+        getRoutes(data)
     }
 
     return (

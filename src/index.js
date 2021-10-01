@@ -3,21 +3,15 @@ import ReactDOM from 'react-dom';
 import 'normalize.css'
 import './scss/index.scss';
 import {App} from './App';
-import reportWebVitals from './reportWebVitals';
 import {BrowserRouter} from "react-router-dom";
 import {Provider} from "react-redux";
-import {store} from "./store";
+import {store} from "./store/store";
 
 ReactDOM.render(
-    <Provider store={store} basename={process.env.PUBLIC_URL}>
-        <BrowserRouter>
+    <Provider store={store}>
+        <BrowserRouter basename={process.env.PUBLIC_URL}>
             <App/>
         </BrowserRouter>
     </Provider>,
     document.getElementById('root')
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();

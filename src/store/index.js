@@ -1,13 +1,25 @@
-import {applyMiddleware, combineReducers, createStore} from "redux";
-import { composeWithDevTools } from 'redux-devtools-extension';
-import createSagaMiddleware from 'redux-saga';
-import reducers from "./reducers";
-import {rootWatcher} from "./sagas";
+import {all} from "redux-saga/effects";
+import {auth, authorizationWatcher, authActions} from "./auth";
+import {getAddressListWatcher, getRoutesWatcher, order, orderActions} from "./order";
+import {profile, profileActions, profileWatcher} from "./profile";
+import {registration, registrationActions, registrationWatcher} from "./registration";
 
-const sagaMiddleware = createSagaMiddleware()
+export const allActionCreators = {
+    ...authActions,
+    ...orderActions,
+    ...profileActions,
+    ...registrationActions
+}
 
-const rootReducer = combineReducers(reducers)
+export const reducers = {auth, order, profile, registration}
 
-export const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(sagaMiddleware)))
+export function* rootWatcher() {
+    yield all([
+        authorizationWatcher(),
+        getAddressListWatcher(),
+        getRoutesWatcher(),
+        profileWatcher(),
+        registrationWatcher()
+    ])
+}
 
-sagaMiddleware.run(rootWatcher)

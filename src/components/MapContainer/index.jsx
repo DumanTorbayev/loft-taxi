@@ -1,5 +1,5 @@
 import React, {useEffect, useRef, useState} from 'react';
-import './index.scss';
+import styles from './map.module.scss';
 import mapbox from "mapbox-gl";
 import {useSelector} from "react-redux";
 import PropTypes from "prop-types";
@@ -13,38 +13,49 @@ export const MapContainer = ({children}) => {
     const [zoom, setZoom] = useState(9);
     const coordinates = useSelector(state => getCoordinates(state.order))
 
-    const drawRoute = (map, coordinates) => {
-        if(coordinates.length !== 0) {
-            map.flyTo({
-                center: coordinates[0],
-                zoom: 15
-            });
+    const handleDrawRoute = map => {
+        map.flyTo({
+            center: coordinates[0],
+            zoom: 15
+        });
 
-            map.addLayer({
-                id: "route",
-                type: "line",
-                source: {
-                    type: "geojson",
-                    data: {
-                        type: "Feature",
-                        properties: {},
-                        geometry: {
-                            type: "LineString",
-                            coordinates
-                        }
+        map.addLayer({
+            id: "route",
+            type: "line",
+            source: {
+                type: "geojson",
+                data: {
+                    type: "Feature",
+                    properties: {},
+                    geometry: {
+                        type: "LineString",
+                        coordinates
                     }
-                },
-                layout: {
-                    "line-join": "round",
-                    "line-cap": "round"
-                },
-                paint: {
-                    "line-color": "#ffc617",
-                    "line-width": 8
                 }
-            });
+            },
+            layout: {
+                "line-join": "round",
+                "line-cap": "round"
+            },
+            paint: {
+                "line-color": "#ffc617",
+                "line-width": 8
+            }
+        });
+    }
+
+    const drawRoute = (map, coordinates) => {
+        if (coordinates.length !== 0) {
+
+            map.on('load', () => {
+                handleDrawRoute(map)
+            })
+
+            if (map.isStyleLoaded()) {
+                handleDrawRoute(map)
+            }
         } else {
-            if(map.getLayer('route')) {
+            if (map.getLayer('route')) {
                 map.removeLayer('route')
                 map.removeSource('route')
                 map.flyTo({
@@ -56,7 +67,7 @@ export const MapContainer = ({children}) => {
     };
 
     useEffect(() => {
-        mapbox.accessToken = process.env.REACT_APP_MAPBOX_TOKEN
+        mapbox.accessToken = 'pk.eyJ1IjoiZC10b3JiYWV2IiwiYSI6ImNrdGNsMHh5ZDI2ejUydm45NzVubWdpZXIifQ.ZCX_RjdS6DGeZs7UsC54OA'
 
         if (map.current) return;
         map.current = new mapbox.Map({
@@ -81,9 +92,9 @@ export const MapContainer = ({children}) => {
     }, [coordinates])
 
     return (
-        <main className="map-layout">
+        <main className={styles.layout}>
             {children}
-            <div ref={mapContainer} className="map-container"/>
+            <div ref={mapContainer} className={styles.container}/>
         </main>
     );
 };
