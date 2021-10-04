@@ -1,6 +1,6 @@
 import React, {useEffect, useRef, useState} from 'react';
 import styles from './map.module.scss';
-import mapbox from "mapbox-gl";
+import mapbox from "!mapbox-gl";
 import {useSelector} from "react-redux";
 import PropTypes from "prop-types";
 import {getCoordinates} from "../../store/selectors";
