@@ -8,7 +8,6 @@ import {Profile} from "../../pages/Profile";
 import {Header} from "../Header";
 import {Login} from "../../pages/Login";
 import {Registration} from "../../pages/Registration";
-import {PageNotFound} from "../PageNotFound";
 
 export const routesPath = {
     order: '/order',
@@ -32,8 +31,10 @@ export const RootRouter = () => {
                 <Route path={routesPath.registration}>
                     {isLoggedIn ? <Redirect to={routesPath.order}/> : <Registration/>}
                 </Route>
-                <Route path='*' component={PageNotFound}/>
-                <Redirect to={routesPath.order} />
+                <Route path='*'>
+                    <Redirect to={isLoggedIn ? routesPath.order : routesPath.login} />
+                </Route>
+                <Redirect from='/' to={routesPath.order} />
             </Switch>
         </>
     );

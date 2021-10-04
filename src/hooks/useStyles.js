@@ -2,10 +2,11 @@ import {makeStyles} from "@material-ui/core";
 
 export const useStyles = makeStyles({
     gap: {
-        gap: '0 24px'
+        gap: '0 24px',
+        width: '100%',
     },
     formControl: {
-        width: 'calc(50% - 12px)'
+        width: 'calc(50% - 12px)',
     },
     btnPreloader: {
         position: 'absolute',

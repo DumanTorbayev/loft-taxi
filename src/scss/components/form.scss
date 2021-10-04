@@ -5,17 +5,42 @@
   width: 100%;
   min-width: 355px;
   margin: 56px 112.5px;
+  @media (max-width: $tablet-1024) {
+    min-width: auto;
+    margin: 28px 56px;
+  }
+  @media (max-width: $mobile-576) {
+    max-width: 300px;
+    margin: 16px 32px;
+  }
+  @media (max-width: $mobile-576) {
+    margin: 8px;
+    max-width: 100%;
+    width: calc(100vw - 20px);
+  }
 
   &--order {
     min-width: auto;
     width: 398px;
     margin: 36px 42px 20px;
+    @media (max-width: $tablet-1024) {
+      width: 300px;
+      margin: 0 16px;
+    }
+    @media (max-width: $mobile-576) {
+      width: calc(100vw - 56px);
+      margin: 0 16px;
+    }
   }
 
   &--profile {
     width: 100%;
     max-width: 355px;
     margin: 0;
+    @media (max-width: 576px) {
+      max-width: calc(100vw - 50px);
+      width: calc(100vw - 50px);
+    }
   }
 
   &__title {
@@ -24,12 +49,18 @@
     font-size: 30px;
     line-height: 35px;
     color: #000000;
+    @media (max-width: $tablet-1024) {
+      margin: 0 0 18px;
+    }
   }
 
   &__restore-password {
     align-self: flex-end;
     margin: 13px 0 46px;
     color: #828282;
+    @media (max-width: $tablet-1024) {
+      margin: 13px 0 24px;
+    }
   }
 
   &__redirect-btn {

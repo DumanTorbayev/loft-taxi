@@ -9,8 +9,6 @@ const setToken = (token) => {
 }
 
 function* authorizationWorker(action) {
-    console.log(action, 'saga action');
-
     const {data} = yield call(authorization, action.payload)
 
     if(data.success) {

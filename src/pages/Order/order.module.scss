@@ -6,11 +6,26 @@
   top: 0;
   left: 0;
   padding: 48px;
+  @media (max-width: 576px) {
+    top: auto;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 0;
+  }
 }
 
 .orderPopup {
   max-width: 345px;
   margin: 36px 36px 20px;
+  @media (max-width: 1024px) {
+    max-width: 300px;
+    margin: 16px 16px 0;
+  }
+  @media (max-width: 576px) {
+    max-width: calc(100vw - 50px);
+    width: calc(100vw - 40px);
+  }
 }
 
 .title {
@@ -19,10 +34,20 @@
   font-weight: bold;
   font-size: 36px;
   line-height: 42px;
+  @media (max-width: 1024px) {
+    margin-bottom: 8px;
+    font-size: 30px;
+    line-height: 36px;
+  }
 }
 
 .descr {
   font-size: 18px;
   line-height: 21px;
   color: #7B7B7B;
+  @media (max-width: 1024px) {
+    margin-top: 0;
+    font-size: 16px;
+    line-height: 19px;
+  }
 }
