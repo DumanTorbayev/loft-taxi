@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/loft-taxi/static/css/main.1644aa2a.chunk.css",
-    "main.js": "/loft-taxi/static/js/main.bc4ad917.chunk.js",
-    "main.js.map": "/loft-taxi/static/js/main.bc4ad917.chunk.js.map",
+    "main.css": "/loft-taxi/static/css/main.a9b2df7d.chunk.css",
+    "main.js": "/loft-taxi/static/js/main.86d09360.chunk.js",
+    "main.js.map": "/loft-taxi/static/js/main.86d09360.chunk.js.map",
     "runtime-main.js": "/loft-taxi/static/js/runtime-main.270eb726.js",
     "runtime-main.js.map": "/loft-taxi/static/js/runtime-main.270eb726.js.map",
     "static/css/2.679831fc.chunk.css": "/loft-taxi/static/css/2.679831fc.chunk.css",
-    "static/js/2.1a9dbd14.chunk.js": "/loft-taxi/static/js/2.1a9dbd14.chunk.js",
-    "static/js/2.1a9dbd14.chunk.js.map": "/loft-taxi/static/js/2.1a9dbd14.chunk.js.map",
+    "static/js/2.3ada67fd.chunk.js": "/loft-taxi/static/js/2.3ada67fd.chunk.js",
+    "static/js/2.3ada67fd.chunk.js.map": "/loft-taxi/static/js/2.3ada67fd.chunk.js.map",
     "index.html": "/loft-taxi/index.html",
     "static/css/2.679831fc.chunk.css.map": "/loft-taxi/static/css/2.679831fc.chunk.css.map",
-    "static/css/main.1644aa2a.chunk.css.map": "/loft-taxi/static/css/main.1644aa2a.chunk.css.map",
-    "static/js/2.1a9dbd14.chunk.js.LICENSE.txt": "/loft-taxi/static/js/2.1a9dbd14.chunk.js.LICENSE.txt",
+    "static/css/main.a9b2df7d.chunk.css.map": "/loft-taxi/static/css/main.a9b2df7d.chunk.css.map",
+    "static/js/2.3ada67fd.chunk.js.LICENSE.txt": "/loft-taxi/static/js/2.3ada67fd.chunk.js.LICENSE.txt",
     "static/media/index.scss": "/loft-taxi/static/media/Roboto-Regular.d255c3ec.woff",
     "static/media/burger-menu-icon.de21b81a.svg": "/loft-taxi/static/media/burger-menu-icon.de21b81a.svg",
     "static/media/close.ee2dd8dd.svg": "/loft-taxi/static/media/close.ee2dd8dd.svg",
@@ -23,8 +23,8 @@
   "entrypoints": [
     "static/js/runtime-main.270eb726.js",
     "static/css/2.679831fc.chunk.css",
-    "static/js/2.1a9dbd14.chunk.js",
-    "static/css/main.1644aa2a.chunk.css",
-    "static/js/main.bc4ad917.chunk.js"
+    "static/js/2.3ada67fd.chunk.js",
+    "static/css/main.a9b2df7d.chunk.css",
+    "static/js/main.86d09360.chunk.js"
   ]
 }
