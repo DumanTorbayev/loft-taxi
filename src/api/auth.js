@@ -1,5 +1,5 @@
-import {api} from "./index";
+import {api} from './index'
 
 export const authorization = (data) => {
-    return api.post('/auth', data)
+  return api.post('/auth', data)
 }

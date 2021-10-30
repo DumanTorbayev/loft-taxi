@@ -1,30 +1,34 @@
-import {createAction, createSlice} from "@reduxjs/toolkit";
+import {createAction, createSlice} from '@reduxjs/toolkit'
 
 const initialState = {
-    card: null,
-    isSuccess: false,
-    error: '',
-    isLoading: false,
+  card: null,
+  isSuccess: false,
+  error: null,
+  isLoading: false,
 }
 
 const profile = createSlice({
-    name: 'profile',
-    initialState,
-    reducers: {
-        fetchUserCard: state => {
-            state.isLoading = true
-        },
-        setSuccess: (state, action) => {
-            state.isSuccess = action.payload
-            state.isLoading = false
-        },
-        setCard: (state, action) => {
-            state.card = action.payload
-        },
-        setError: (state, action) => {
-            state.error = action.payload
-        }
-    }
+  name: 'profile',
+  initialState,
+  reducers: {
+    fetchUserCard: (state) => {
+      state.isLoading = true
+      state.error = null
+    },
+    setSuccess: (state, action) => {
+      state.isSuccess = action.payload
+      state.isLoading = false
+      state.error = null
+    },
+    setCard: (state, action) => {
+      state.card = action.payload
+      state.error = null
+    },
+    setError: (state, action) => {
+      state.error = action.payload
+      state.isLoading = false
+    },
+  },
 })
 
 export const sagaFetchCard = createAction('saga/fetchCard')

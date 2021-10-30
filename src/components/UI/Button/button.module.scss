@@ -12,9 +12,9 @@
   font-size: 18px;
   line-height: 20px;
   cursor: pointer;
-  
-  &--disabled {
-    background-color: #ccc;
-    cursor: default;
-  }
+}
+
+.primaryDisabled {
+  background-color: #ccc;
+  cursor: default;
 }
